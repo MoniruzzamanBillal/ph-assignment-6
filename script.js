@@ -1,11 +1,10 @@
 const categoryCardContainer = document.querySelector(".categoryCardContainer");
+const cardContent = document.querySelector(".cardContent");
 
 // console.log(categoryCardContainer);
 
 // function for rendering category
 function renderCategory(element) {
-  //   console.log(element);
-
   const categoryButton = document.createElement("div");
 
   categoryButton.innerHTML = `
@@ -31,10 +30,105 @@ const fetchCategory = async () => {
 
   //   console.log(datas);
 
+  categoryCardContainer.innerHTML = "";
   datas.map((ele, ind) => {
     renderCategory(ele);
   });
 };
+
+// function for render cards
+function renderCard(element) {
+  //   console.log(element);
+  console.log(element.authors[0]);
+  //   console.log(element.authors[0].profile_name);
+  console.log(element.authors[0].verified);
+
+  const dataCard = document.createElement("div");
+
+  dataCard.innerHTML = `
+  
+  <div class="dataCard">
+  <!-- card top image starts  -->
+  <div class="dataCardTop mb-2">
+    <div class="dataCardImg rounded-md overflow-auto h-[14rem]  ">
+      <img
+        src=${element.thumbnail}
+        class="w-full h-full object-cover "
+        alt=""
+      />
+    </div>
+  </div>
+  <!-- card top image ends -->
+
+  <div class="dataCardBottom">
+    <div class="dataCardBottomContainer flex justify-between">
+      <!-- left side of data starts  -->
+      <div class="dataCardBottomLeft w-[17%]">
+        <div class="dataCardBottomImg w-[82%] m-auto">
+          <img
+            src="images/testImg/user1.jpg"
+            class="w-full h-full rounded-full"
+            alt=""
+          />
+        </div>
+      </div>
+      <!-- left side of data starts  -->
+      <!--  -->
+
+      <!-- right side of data card starts  -->
+
+      <div class="dataCardBottomRight w-[82%]">
+        <!-- bottom right heading starts  -->
+        <div
+          class="bottomRightHeading font-semibold mb-2 text-sm lg:text-base"
+        >
+          <h1>${element.title}</h1>
+        </div>
+        <!-- bottom right heading starts  -->
+      
+        <!-- bottom card name starts  -->
+  
+        <div
+          class="bottomCardName mb-1 flex items-center self-center"
+        >
+          <p
+            class="inline mr-2 text-[#171717B2] text-sm lg:text-base"
+          >
+           
+            ${element?.authors[0]?.profile_name}
+          </p>
+    
+          <p class="inline">
+            ${
+              element?.authors[0]?.verified
+                ? ' <img src="images/blueTic.svg"  />'
+                : ""
+            }
+          </p>
+        </div>
+        <!-- bottom card name ends  -->
+
+        <!--  -->
+        <!-- bottom card views starts  -->
+        <div
+          class="bottomCardViews text-[#171717B2] text-sm lg:text-base"
+        >
+          <p>91K views</p>
+        </div>
+        <!-- bottom card views ends  -->
+      </div>
+
+      <!-- right side of data card ends  -->
+      <!--  -->
+    </div>
+  </div>
+</div>
+  
+  
+  `;
+
+  cardContent.appendChild(dataCard);
+}
 
 // function for click category
 async function handleCategoryClick(categoryId) {
@@ -46,13 +140,18 @@ async function handleCategoryClick(categoryId) {
   );
 
   const promiseData = await fetchedData.json();
-
   const datas = promiseData.data;
 
+  cardContent.innerHTML = "";
+
   console.log(datas);
+  datas.map((ele, ind) => {
+    renderCard(ele);
+  });
 }
 
 fetchCategory();
+handleCategoryClick(1000);
 
 // https://openapi.programming-hero.com/api/videos/categories
 
