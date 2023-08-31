@@ -39,7 +39,7 @@ const fetchCategory = async () => {
 // function for render cards
 function renderCard(element) {
   //   console.log(element);
-  console.log(`date = ${element?.others?.posted_date}`);
+  //   console.log(`date = ${element?.others?.posted_date}`);
   //   console.log(element.authors[0]);
   //   console.log(element.authors[0].profile_name);
   //   console.log(element.authors[0].verified);
@@ -47,9 +47,6 @@ function renderCard(element) {
   let hour = parseInt(element?.others?.posted_date / 3600);
   let reminder = element?.others?.posted_date % 3600;
   let minute = parseInt(reminder / 60);
-
-  console.log(`hour = ${hour}`);
-  console.log(`minute = ${minute}`);
 
   const dataCard = document.createElement("div");
 
@@ -135,7 +132,7 @@ function renderCard(element) {
         <div
           class="bottomCardViews text-[#171717B2] text-sm lg:text-base"
         >
-          <p>${element.others.views}</p>
+          <p>${element.others.views} views</p>
         </div>
         <!-- bottom card views ends  -->
       </div>
