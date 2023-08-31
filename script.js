@@ -67,10 +67,15 @@ function renderCard(element) {
     </div>
     <!-- date show section starts  -->
     <div
-      class="dateShow bg-[#171717] text-white py-1 px-3 rounded-md absolute transform -right-8 -bottom-1 -translate-x-1/2 -translate-y-1/2"
+      class="dateShow bg-[#171717] text-white py-1 px-3 rounded-md absolute transform -right-9 -bottom-1 -translate-x-1/2 -translate-y-1/2"
     >
 
-     <h1>${hour}hrs ${minute} min ago </h1>
+    
+     ${
+       element?.others?.posted_date
+         ? `  <h1>${hour}hrs ${minute} min ago </h1> `
+         : ""
+     }
   
     </div>
     <!-- date show section ends  -->
@@ -130,7 +135,6 @@ function renderCard(element) {
         <div
           class="bottomCardViews text-[#171717B2] text-sm lg:text-base"
         >
-          <p>91K views</p>
           <p>${element.others.views}</p>
         </div>
         <!-- bottom card views ends  -->
