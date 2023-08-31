@@ -39,9 +39,17 @@ const fetchCategory = async () => {
 // function for render cards
 function renderCard(element) {
   //   console.log(element);
-  console.log(element.authors[0]);
+  console.log(`date = ${element?.others?.posted_date}`);
+  //   console.log(element.authors[0]);
   //   console.log(element.authors[0].profile_name);
-  console.log(element.authors[0].verified);
+  //   console.log(element.authors[0].verified);
+
+  let hour = parseInt(element?.others?.posted_date / 3600);
+  let reminder = element?.others?.posted_date % 3600;
+  let minute = parseInt(reminder / 60);
+
+  console.log(`hour = ${hour}`);
+  console.log(`minute = ${minute}`);
 
   const dataCard = document.createElement("div");
 
@@ -49,7 +57,7 @@ function renderCard(element) {
   
   <div class="dataCard">
   <!-- card top image starts  -->
-  <div class="dataCardTop mb-2">
+  <div class="dataCardTop relative mb-2">
     <div class="dataCardImg rounded-md overflow-auto h-[14rem]  ">
       <img
         src=${element.thumbnail}
@@ -57,6 +65,15 @@ function renderCard(element) {
         alt=""
       />
     </div>
+    <!-- date show section starts  -->
+    <div
+      class="dateShow bg-[#171717] text-white py-1 px-3 rounded-md absolute transform -right-8 -bottom-1 -translate-x-1/2 -translate-y-1/2"
+    >
+
+     <h1>${hour}hrs ${minute} min ago </h1>
+  
+    </div>
+    <!-- date show section ends  -->
   </div>
   <!-- card top image ends -->
 
@@ -114,6 +131,7 @@ function renderCard(element) {
           class="bottomCardViews text-[#171717B2] text-sm lg:text-base"
         >
           <p>91K views</p>
+          <p>${element.others.views}</p>
         </div>
         <!-- bottom card views ends  -->
       </div>
@@ -144,7 +162,7 @@ async function handleCategoryClick(categoryId) {
 
   cardContent.innerHTML = "";
 
-  console.log(datas);
+  //   console.log(datas);
   datas.map((ele, ind) => {
     renderCard(ele);
   });
