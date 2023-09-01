@@ -38,10 +38,11 @@ const fetchCategory = async () => {
 
 // function for render cards
 function renderCard(element) {
-  //   console.log(element);
+  // console.log(element);
   //   console.log(`date = ${element?.others?.posted_date}`);
-  //   console.log(element.authors[0]);
-  //   console.log(element.authors[0].profile_name);
+  // console.log(element.authors[0]);
+  // console.log(element.authors[0].profile_picture);
+  // console.log(element.authors[0].profile_name);
   //   console.log(element.authors[0].verified);
 
   let hour = parseInt(element?.others?.posted_date / 3600);
@@ -83,9 +84,9 @@ function renderCard(element) {
     <div class="dataCardBottomContainer flex justify-between">
       <!-- left side of data starts  -->
       <div class="dataCardBottomLeft w-[17%]">
-        <div class="dataCardBottomImg w-[82%] m-auto">
+        <div class="dataCardBottomImg w-[2.5rem] h-[2.5rem] m-auto">
           <img
-            src="images/testImg/user1.jpg"
+            src=${element.authors[0].profile_picture}
             class="w-full h-full rounded-full"
             alt=""
           />
