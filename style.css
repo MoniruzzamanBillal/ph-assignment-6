@@ -7,3 +7,13 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+.activeBg {
+  background-color: red;
+  color: white;
+}
+
+.defaultBg {
+  background-color: #c9c2c2b2;
+  color: black;
+}

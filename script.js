@@ -11,14 +11,35 @@ function renderCategory(element) {
 
   categoryButton.innerHTML = `
   <div
-  class="categoryButton mr-2 sm:mr-4 bg-slate-200 py-[.3rem] px-4 sm:py-[.4rem] sm:px-6 font-semibold text-sm sm:text-base cursor-pointer rounded hover:shadow active:scale-[.97]" onclick="handleCategoryClick('${element.category_id}') "
+  class="categoryButton  mr-2 sm:mr-4 font-semibold text-sm sm:text-base " onclick="handleCategoryClick('${element.category_id}') " 
 >
-  <h1> ${element.category} </h1>
+  <h1 class=" buttons defaultBg py-[.3rem]  px-4 sm:py-[.4rem] sm:px-6 cursor-pointer rounded hover:shadow active:scale-[.97] " > ${element.category} </h1>
 </div>
   
   `;
 
   categoryCardContainer.appendChild(categoryButton);
+
+  const categoryButtons = document.querySelectorAll(".categoryButton");
+
+  categoryButtons[0].childNodes[1].classList.remove("defaultBg");
+  categoryButtons[0].childNodes[1].classList.add("activeBg");
+
+  categoryButtons.forEach((ele) => {
+    ele.addEventListener("click", (e) => {
+      document.querySelectorAll(".buttons").forEach((button) => {
+        button.classList.add("defaultBg");
+        button.classList.remove("activeBg");
+      });
+
+      if (e.target.classList.contains("defaultBg")) {
+        e.target.classList.add("activeBg");
+        e.target.classList.remove("defaultBg");
+      }
+    });
+  });
+
+  // console.log(categoryButtons);
 }
 
 // function for fetching category from API
@@ -63,7 +84,9 @@ function renderCard(element) {
     </div>
     <!-- date show section starts  -->
     <div
-      class="dateShow bg-[#171717] text-white py-1 px-3 rounded-md absolute transform -right-9 -bottom-1 -translate-x-1/2 -translate-y-1/2"
+      class="dateShow ${
+        element?.others?.posted_date ? " bg-[#171717] " : ""
+      } text-white py-1 px-3 rounded-md absolute transform -right-9 -bottom-1 -translate-x-1/2 -translate-y-1/2"
     >
 
     
@@ -200,6 +223,8 @@ async function handleCategoryClick(categoryId) {
       renderCard(ele);
     });
   }
+
+  //
 }
 
 fetchCategory();
