@@ -1,5 +1,6 @@
 const categoryCardContainer = document.querySelector(".categoryCardContainer");
 const cardContent = document.querySelector(".cardContent");
+const nothingFoundCard = document.querySelector(".nothingFoundCard");
 const loader = document.querySelector(".loader");
 
 loader.classList.add("hidden");
@@ -150,10 +151,8 @@ function renderCard(element) {
 // function for click category
 async function handleCategoryClick(categoryId) {
   loader.classList.remove("hidden");
-
-  console.log("category button clicked");
+  // console.log("category button clicked");
   console.log(categoryId);
-
   const fetchedData = await fetch(
     `https://openapi.programming-hero.com/api/videos/category/${categoryId}`
   );
@@ -162,12 +161,45 @@ async function handleCategoryClick(categoryId) {
   const datas = promiseData.data;
 
   cardContent.innerHTML = "";
+  nothingFoundCard.innerHTML = "";
 
-  //   console.log(datas);
+  // console.log(datas.length);
   loader.classList.add("hidden");
-  datas.map((ele, ind) => {
-    renderCard(ele);
-  });
+
+  if (datas.length === 0) {
+    const dataCard = document.createElement("div");
+
+    dataCard.innerHTML = `
+    <div class="dataCard">
+            <div
+              class="dataCardWrapper w-full flex flex-col justify-center items-center self-center"
+            >
+              <div
+                class="nothingIcon mt-4 sm:mt-6 md:mt-14 mb-5 sm:mb-6 md:mb-8 w-[9rem] sm:w-[10rem] md:w-[11rem]"
+              >
+                <img src="images/Icon.png" class="w-full h-full" alt="" />
+              </div>
+              <!--  -->
+              <!--  -->
+
+              <div
+                class="nothingHeading text-center w-[70%] sm:w-[52%] md:w-[40%] lg:w-[25%] font-bold text-xl sm:text-2xl"
+              >
+                <h1>Oops!! Sorry, There is no content here</h1>
+              </div>
+
+              <!--  -->
+              <!--  -->
+            </div>
+          </div>
+    
+    `;
+    nothingFoundCard.appendChild(dataCard);
+  } else {
+    datas.map((ele, ind) => {
+      renderCard(ele);
+    });
+  }
 }
 
 fetchCategory();
