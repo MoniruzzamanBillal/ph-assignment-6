@@ -247,8 +247,10 @@ sortByView.addEventListener("click", async () => {
 
   // Sorting the array based on views in descending order
   unsortedDatas.sort((a, b) => {
-    const viewsA = parseInt(a.others.views.replace(/[^0-9.]/g, ""));
-    const viewsB = parseInt(b.others.views.replace(/[^0-9.]/g, ""));
+    const viewsA = parseInt(a.others.views);
+    const viewsB = parseInt(b.others.views);
+    console.log(viewsA);
+    console.log(viewsB);
     return viewsB - viewsA;
   });
 
