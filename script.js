@@ -27,6 +27,7 @@ function renderCategory(element) {
   categoryButtons[0].childNodes[1].classList.remove("defaultBg");
   categoryButtons[0].childNodes[1].classList.add("activeBg");
 
+  // functionality for changing button color
   categoryButtons.forEach((ele) => {
     ele.addEventListener("click", (e) => {
       document.querySelectorAll(".buttons").forEach((button) => {
@@ -40,12 +41,11 @@ function renderCategory(element) {
       }
     });
   });
-
-  // console.log(categoryButtons);
 }
 
 // function for fetching category from API
 const fetchCategory = async () => {
+  categoryCardContainer.innerHTML = "";
   loader.classList.remove("hidden");
   const response = await fetch(
     `https://openapi.programming-hero.com/api/videos/categories`
@@ -54,9 +54,8 @@ const fetchCategory = async () => {
   const responsePromise = await response.json();
   const datas = responsePromise.data;
 
-  categoryCardContainer.innerHTML = "";
   loader.classList.add("hidden");
-  datas.map((ele, ind) => {
+  datas.map((ele) => {
     renderCategory(ele);
   });
 };
@@ -70,7 +69,6 @@ function renderCard(element) {
   const dataCard = document.createElement("div");
 
   dataCard.innerHTML = `
-  
   <div class="dataCard">
   <!-- card top image starts  -->
   <div class="dataCardTop relative mb-2">
@@ -173,10 +171,11 @@ function renderCard(element) {
 // function for click category
 async function handleCategoryClick(categoryId) {
   categoryId_Global = categoryId;
+  cardContent.innerHTML = "";
+  nothingFoundCard.innerHTML = "";
 
   loader.classList.remove("hidden");
-  // console.log("category button clicked");
-  // console.log(`category id from category click function = ${categoryId}`);
+
   const fetchedData = await fetch(
     `https://openapi.programming-hero.com/api/videos/category/${categoryId}`
   );
@@ -184,10 +183,6 @@ async function handleCategoryClick(categoryId) {
   const promiseData = await fetchedData.json();
   const datas = promiseData.data;
 
-  cardContent.innerHTML = "";
-  nothingFoundCard.innerHTML = "";
-
-  // console.log(datas.length);
   loader.classList.add("hidden");
 
   if (datas.length === 0) {
@@ -204,23 +199,18 @@ async function handleCategoryClick(categoryId) {
                 <img src="images/Icon.png" class="w-full h-full" alt="" />
               </div>
               <!--  -->
-              <!--  -->
-
               <div
                 class="nothingHeading text-center w-[70%] sm:w-[52%] md:w-[40%] lg:w-[25%] font-bold text-xl sm:text-2xl"
               >
                 <h1>Oops!! Sorry, There is no content here</h1>
               </div>
-
-              <!--  -->
               <!--  -->
             </div>
           </div>
-    
     `;
     nothingFoundCard.appendChild(dataCard);
   } else {
-    datas.map((ele, ind) => {
+    datas.map((ele) => {
       renderCard(ele);
     });
   }
@@ -228,6 +218,8 @@ async function handleCategoryClick(categoryId) {
 
 // sort by view functionality
 sortByView.addEventListener("click", async () => {
+  cardContent.innerHTML = "";
+  nothingFoundCard.innerHTML = "";
   loader.classList.remove("hidden");
 
   const fetchedData = await fetch(
@@ -241,12 +233,8 @@ sortByView.addEventListener("click", async () => {
   const sortedData = unsortedDatas.sort((a, b) => {
     const viewsA = parseInt(a.others.views);
     const viewsB = parseInt(b.others.views);
-
     return viewsB - viewsA;
   });
-
-  cardContent.innerHTML = "";
-  nothingFoundCard.innerHTML = "";
 
   loader.classList.add("hidden");
 
@@ -288,7 +276,3 @@ sortByView.addEventListener("click", async () => {
 
 fetchCategory();
 handleCategoryClick(1000);
-
-// https://openapi.programming-hero.com/api/videos/categories
-
-// https://openapi.programming-hero.com/api/videos/category/${id}
