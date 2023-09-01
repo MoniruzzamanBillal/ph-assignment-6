@@ -2,6 +2,8 @@ const categoryCardContainer = document.querySelector(".categoryCardContainer");
 const cardContent = document.querySelector(".cardContent");
 const nothingFoundCard = document.querySelector(".nothingFoundCard");
 const loader = document.querySelector(".loader");
+const sortByView = document.querySelector(".sortByView");
+let categoryId_Global;
 
 loader.classList.add("hidden");
 
@@ -61,9 +63,6 @@ const fetchCategory = async () => {
 
 // function for render cards
 function renderCard(element) {
-  // console.log(element);
-  // console.log(element.authors[0]);
-
   let hour = parseInt(element?.others?.posted_date / 3600);
   let reminder = element?.others?.posted_date % 3600;
   let minute = parseInt(reminder / 60);
@@ -173,9 +172,11 @@ function renderCard(element) {
 
 // function for click category
 async function handleCategoryClick(categoryId) {
+  categoryId_Global = categoryId;
+
   loader.classList.remove("hidden");
   // console.log("category button clicked");
-  console.log(categoryId);
+  // console.log(`category id from category click function = ${categoryId}`);
   const fetchedData = await fetch(
     `https://openapi.programming-hero.com/api/videos/category/${categoryId}`
   );
@@ -226,6 +227,87 @@ async function handleCategoryClick(categoryId) {
 
   //
 }
+
+// sort by view functionality
+
+sortByView.addEventListener("click", async () => {
+  loader.classList.remove("hidden");
+  // console.log("sort button clicked");
+  console.log(`curent category = ${categoryId_Global}`);
+
+  const fetchedData = await fetch(
+    `https://openapi.programming-hero.com/api/videos/category/${categoryId_Global}`
+  );
+
+  const promiseData = await fetchedData.json();
+  const unsortedDatas = promiseData.data;
+
+  console.log(unsortedDatas);
+  console.log(unsortedDatas[0].others.views);
+
+  unsortedDatas.forEach((ele) => {
+    console.log(ele);
+  });
+
+  unsortedDatas.sort((a, b) => {
+    console.log(a);
+    console.log(b);
+    console.log(" ");
+  });
+
+  // Custom sorting function by the 'age' property in ascending order
+  // unsortedDatas.sort(function (a, b) {
+  //     if (a.age < b.age) {
+  //         return -1;
+  //     }
+  //     if (a.age > b.age) {
+  //         return 1;
+  //     }
+  //     return 0;
+  // });
+
+  // console.log(unsortedDatas);
+
+  cardContent.innerHTML = "";
+  nothingFoundCard.innerHTML = "";
+
+  loader.classList.add("hidden");
+
+  if (unsortedDatas.length === 0) {
+    const dataCard = document.createElement("div");
+
+    dataCard.innerHTML = `
+    <div class="dataCard">
+            <div
+              class="dataCardWrapper w-full flex flex-col justify-center items-center self-center"
+            >
+              <div
+                class="nothingIcon mt-4 sm:mt-6 md:mt-14 mb-5 sm:mb-6 md:mb-8 w-[9rem] sm:w-[10rem] md:w-[11rem]"
+              >
+                <img src="images/Icon.png" class="w-full h-full" alt="" />
+              </div>
+              <!--  -->
+              <!--  -->
+
+              <div
+                class="nothingHeading text-center w-[70%] sm:w-[52%] md:w-[40%] lg:w-[25%] font-bold text-xl sm:text-2xl"
+              >
+                <h1>Oops!! Sorry, There is no content here</h1>
+              </div>
+
+              <!--  -->
+              <!--  -->
+            </div>
+          </div>
+    
+    `;
+    nothingFoundCard.appendChild(dataCard);
+  } else {
+    unsortedDatas.map((ele, ind) => {
+      renderCard(ele);
+    });
+  }
+});
 
 fetchCategory();
 handleCategoryClick(1000);
