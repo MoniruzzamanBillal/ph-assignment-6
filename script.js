@@ -224,16 +224,11 @@ async function handleCategoryClick(categoryId) {
       renderCard(ele);
     });
   }
-
-  //
 }
 
 // sort by view functionality
-
 sortByView.addEventListener("click", async () => {
   loader.classList.remove("hidden");
-  // console.log("sort button clicked");
-  console.log(`curent category = ${categoryId_Global}`);
 
   const fetchedData = await fetch(
     `https://openapi.programming-hero.com/api/videos/category/${categoryId_Global}`
@@ -242,39 +237,20 @@ sortByView.addEventListener("click", async () => {
   const promiseData = await fetchedData.json();
   const unsortedDatas = promiseData.data;
 
-  console.log(unsortedDatas);
-  // console.log(unsortedDatas[0].others.views);
-
-  // Sorting the array based on views in descending order
-  unsortedDatas.sort((a, b) => {
+  // sorting data
+  const sortedData = unsortedDatas.sort((a, b) => {
     const viewsA = parseInt(a.others.views);
     const viewsB = parseInt(b.others.views);
-    console.log(viewsA);
-    console.log(viewsB);
+
     return viewsB - viewsA;
   });
-
-  console.log(unsortedDatas);
-
-  // Custom sorting function by the 'age' property in ascending order
-  // unsortedDatas.sort(function (a, b) {
-  //     if (a.age < b.age) {
-  //         return -1;
-  //     }
-  //     if (a.age > b.age) {
-  //         return 1;
-  //     }
-  //     return 0;
-  // });
-
-  // console.log(unsortedDatas);
 
   cardContent.innerHTML = "";
   nothingFoundCard.innerHTML = "";
 
   loader.classList.add("hidden");
 
-  if (unsortedDatas.length === 0) {
+  if (sortedData.length === 0) {
     const dataCard = document.createElement("div");
 
     dataCard.innerHTML = `
@@ -304,7 +280,7 @@ sortByView.addEventListener("click", async () => {
     `;
     nothingFoundCard.appendChild(dataCard);
   } else {
-    unsortedDatas.map((ele, ind) => {
+    sortedData.map((ele, ind) => {
       renderCard(ele);
     });
   }
