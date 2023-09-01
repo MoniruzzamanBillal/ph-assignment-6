@@ -243,17 +243,16 @@ sortByView.addEventListener("click", async () => {
   const unsortedDatas = promiseData.data;
 
   console.log(unsortedDatas);
-  console.log(unsortedDatas[0].others.views);
+  // console.log(unsortedDatas[0].others.views);
 
-  unsortedDatas.forEach((ele) => {
-    console.log(ele);
-  });
-
+  // Sorting the array based on views in descending order
   unsortedDatas.sort((a, b) => {
-    console.log(a);
-    console.log(b);
-    console.log(" ");
+    const viewsA = parseInt(a.others.views.replace(/[^0-9.]/g, ""));
+    const viewsB = parseInt(b.others.views.replace(/[^0-9.]/g, ""));
+    return viewsB - viewsA;
   });
+
+  console.log(unsortedDatas);
 
   // Custom sorting function by the 'age' property in ascending order
   // unsortedDatas.sort(function (a, b) {
