@@ -11,43 +11,41 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="questionContainer bg-green-300">
-      <div class="questionWrapper bg-blue-400 w-[95%] sm:w-[90%] m-auto py-4">
-        <div class="questionCOntainer bg-violet-400 flex flex-col">
+    <div class="questionContainer">
+      <div class="questionWrapper w-[95%] sm:w-[90%] m-auto py-4">
+        <div class="questionCOntainer flex flex-col">
           <!-- question1 containeer starts  -->
 
-          <div class="question1 bg-red-800 mb-9 sm:mb-12 md:mb-16">
+          <div class="question1 mb-6">
             <!--             -->
             <div
-              class="questionField bg-pink-300 text-xl sm:text-2xl md:text-3xl font-semibold mb-3"
+              class="questionField text-xl sm:text-2xl md:text-3xl font-semibold mb-3"
             >
               <h1>Q1: Discuss the scope of var, let, and const.</h1>
             </div>
             <!--  -->
 
-            <div
-              class="answerField bg-blue-400 text-base md:text-lg text-start"
-            >
+            <div class="answerField text-base md:text-lg text-start">
               <p
-                class="bg-blue-500 font-bold mb-3 text-lg sm:text-xl md:text-2xl underline"
+                class="font-bold mb-3 text-lg sm:text-xl md:text-2xl underline"
               >
                 Answer:
               </p>
-              <p class="bg-orange-200 mb-2">
+              <p class="mb-2">
                 In JavaScript, "scope" refers to the context in which variables
                 are declared and can be accessed.
               </p>
 
-              <p class="bg-lime-200 mb-2">The scope of var, let, and const :</p>
+              <p class="mb-2">The scope of var, let, and const :</p>
 
-              <p class="bg-blue-300 mb-2">
+              <p class="mb-2">
                 <span class="font-semibold"> 1. Var:</span> The scope of a
                 variable declared with var is function scope. which means they
                 are visible throughout the entire function where they are
                 defined
               </p>
 
-              <p class="bg-red-400 mb-2">
+              <p class="mb-2">
                 <span class="font-semibold"> 2. Let: </span> The scope of a
                 variable declared with let is block scope. which means they are
                 limited to the code block (like a function or a loop) where they
@@ -55,7 +53,7 @@
                 caused by variable leakage.
               </p>
 
-              <p class="bg-amber-700">
+              <p class="">
                 <span class="font-semibold"> 3. Const: </span> The scope of a
                 variable declared with const is also block scope. We use const
                 when we want to create a variable that shouldn't change its
@@ -67,66 +65,64 @@
           </div>
           <!-- question1 containeer ends   -->
 
+          <hr />
+
           <!-- question2 containeer starts  -->
 
-          <div class="question2 bg-red-800 mb-9 sm:mb-11 md:mb-14">
+          <div class="question2 mt-6 pb-6">
             <!--             -->
             <div
-              class="questionField bg-pink-300 text-xl sm:text-2xl md:text-3xl font-semibold mb-3"
+              class="questionField text-xl sm:text-2xl md:text-3xl font-semibold mb-3"
             >
               <h1>Q2: Tell us the use cases of null and undefined.</h1>
             </div>
             <!--  -->
 
-            <div
-              class="answerField bg-blue-400 text-base md:text-lg text-start"
-            >
+            <div class="answerField text-base md:text-lg text-start">
               <p
-                class="bg-blue-500 font-bold mb-3 text-lg sm:text-xl md:text-2xl underline"
+                class="font-bold mb-3 text-lg sm:text-xl md:text-2xl underline"
               >
                 Answer:
               </p>
-              <p class="bg-orange-200 mb-2">
+              <p class="mb-2">
                 Null is used to explicitly represent the absence of a value.
               </p>
-              <p class="bg-orange-200 mb-2">
+              <p class="mb-4">
                 Undefined is used to represent the absence of a value when a
                 variable has not been assigned a value.
               </p>
 
-              <p class="bg-lime-200 mb-2 font-semibold underline">
-                use cases of null:
-              </p>
+              <p class="mb-2 font-semibold underline">use cases of null:</p>
 
-              <p class="bg-blue-300 mb-2">
+              <p class="mb-2">
                 <span class="font-semibold"> 1.Explicit Empty Value:</span> Use
                 null to indicate that a variable or property intentionally has
                 no value.
               </p>
 
-              <p class="bg-blue-300 mb-2">
+              <p class="mb-2">
                 <span class="font-semibold"> 2.Placeholder:</span> Use null as a
                 temporary placeholder when you plan to assign a value to a
                 variable or property later.
               </p>
 
-              <p class="bg-lime-200 mt-2 mb-2 font-semibold underline">
+              <p class="mt-6 mb-2 font-semibold underline">
                 use cases of undefined:
               </p>
 
-              <p class="bg-blue-300 mb-2">
+              <p class="mb-2">
                 <span class="font-semibold"> 1.Default Value:</span> Variables
                 that are declared but not assigned a value automatically have
                 the value undefined.
               </p>
 
-              <p class="bg-blue-300 mb-2">
+              <p class="mb-2">
                 <span class="font-semibold"> 2.Function Parameters:</span> When
                 a function is called with missing arguments, those parameters
                 are set to undefined.
               </p>
 
-              <p class="bg-blue-300 mb-2">
+              <p class="mb-2">
                 <span class="font-semibold"> 3.Missing Object Properties:</span>
                 When trying to access a property that doesn't exist on an
                 object, it returns undefined.
@@ -136,31 +132,29 @@
             <!--  -->
           </div>
           <!-- question2 containeer ends   -->
-
+          <hr />
           <!-- question3 containeer starts  -->
 
-          <div class="question3 bg-lime-300 mb-6">
+          <div class="question3 mt-6 mb-6">
             <!--             -->
             <div
-              class="questionField bg-pink-300 text-xl sm:text-2xl md:text-3xl font-semibold mb-3"
+              class="questionField text-xl sm:text-2xl md:text-3xl font-semibold mb-3"
             >
               <h1>Q3:What do you mean by REST API?</h1>
             </div>
             <!--  -->
 
-            <div
-              class="answerField bg-blue-400 text-base md:text-lg text-start"
-            >
+            <div class="answerField text-base md:text-lg text-start">
               <p
-                class="bg-blue-500 font-bold mb-3 text-lg sm:text-xl md:text-2xl underline"
+                class="font-bold mb-3 text-lg sm:text-xl md:text-2xl underline"
               >
                 Answer:
               </p>
-              <p class="bg-orange-200 mb-2">
+              <p class="mb-3">
                 REST API stands for Representational State Transfer Application
                 Programming Interface.
               </p>
-              <p class="bg-orange-200 mb-2">
+              <p class="mb-2">
                 REST API is a way for different computer programs to communicate
                 and share data over the internet. It uses a set of rules and
                 conventions, like using URLs to represent resources (like web
