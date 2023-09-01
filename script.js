@@ -1,7 +1,8 @@
 const categoryCardContainer = document.querySelector(".categoryCardContainer");
 const cardContent = document.querySelector(".cardContent");
+const loader = document.querySelector(".loader");
 
-// console.log(categoryCardContainer);
+loader.classList.add("hidden");
 
 // function for rendering category
 function renderCategory(element) {
@@ -21,6 +22,7 @@ function renderCategory(element) {
 
 // function for fetching category from API
 const fetchCategory = async () => {
+  loader.classList.remove("hidden");
   const response = await fetch(
     `https://openapi.programming-hero.com/api/videos/categories`
   );
@@ -28,9 +30,8 @@ const fetchCategory = async () => {
   const responsePromise = await response.json();
   const datas = responsePromise.data;
 
-  //   console.log(datas);
-
   categoryCardContainer.innerHTML = "";
+  loader.classList.add("hidden");
   datas.map((ele, ind) => {
     renderCategory(ele);
   });
@@ -39,11 +40,7 @@ const fetchCategory = async () => {
 // function for render cards
 function renderCard(element) {
   // console.log(element);
-  //   console.log(`date = ${element?.others?.posted_date}`);
   // console.log(element.authors[0]);
-  // console.log(element.authors[0].profile_picture);
-  // console.log(element.authors[0].profile_name);
-  //   console.log(element.authors[0].verified);
 
   let hour = parseInt(element?.others?.posted_date / 3600);
   let reminder = element?.others?.posted_date % 3600;
@@ -152,6 +149,8 @@ function renderCard(element) {
 
 // function for click category
 async function handleCategoryClick(categoryId) {
+  loader.classList.remove("hidden");
+
   console.log("category button clicked");
   console.log(categoryId);
 
@@ -165,6 +164,7 @@ async function handleCategoryClick(categoryId) {
   cardContent.innerHTML = "";
 
   //   console.log(datas);
+  loader.classList.add("hidden");
   datas.map((ele, ind) => {
     renderCard(ele);
   });
